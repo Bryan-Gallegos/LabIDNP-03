@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnRegistro;
     public Button btnLogin;
     public static final String objeto = "objeto";
+    public static final String lista = "lista";
     ArrayList<Postulante> listaPostulantes = new ArrayList<Postulante>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class),REQUEST_CODE_POSTULANTE);
+                Intent intent = new Intent();
+                intent.putExtra(lista,  listaPostulantes);
             }
         });
 

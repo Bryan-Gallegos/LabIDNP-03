@@ -46,10 +46,10 @@ public class PostulanteRegistroActivity extends AppCompatActivity {
                 String fechNaci= fecNac.getText().toString();
                 String colPro= colegio.getText().toString();
                 String carPos= carrera.getText().toString();
-                String dni = dni.getText().toString();
+                String id = dni.getText().toString();
 
                 if(!apePaterno.equals("") && !apeMaterno.equals("") && !nombres.equals("") && !fechNaci.equals("") && !colPro.equals("") && !carPos.equals("") && !dni.equals("")) {
-                    Postulante postulante = new Postulante(apePaterno, apeMaterno, nomAlum, fechNaci, colPro, carPos, dni);
+                    Postulante postulante = new Postulante(apePaterno, apeMaterno, nomAlum, fechNaci, colPro, carPos, id);
                     intent.putExtra(objeto,  postulante);
                     setResult(RESULT_OK,intent);
                     finish();

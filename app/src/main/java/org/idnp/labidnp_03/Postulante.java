@@ -2,7 +2,7 @@ package org.idnp.labidnp_03;
 
 import java.io.Serializable;
 
-public class Postulante implements Serializable {
+public class Postulante implements Serializable  {
     private String apellidoPaterno, apellidoMaterno, nombres, fechaNacimiento, colegioProcedencia, carreraPostula, id;
 
     public Postulante(String ap, String am, String n, String f, String col, String carr, String dni){
