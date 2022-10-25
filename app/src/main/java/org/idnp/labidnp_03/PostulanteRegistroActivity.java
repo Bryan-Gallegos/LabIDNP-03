@@ -1,17 +1,13 @@
 package org.idnp.labidnp_03;
-import static org.idnp.labidnp_03.MainActivity.REQUEST_CODE_POSTULANTE;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import static org.idnp.labidnp_03.MainActivity.objeto;
 public class PostulanteRegistroActivity extends AppCompatActivity {
 
@@ -21,7 +17,8 @@ public class PostulanteRegistroActivity extends AppCompatActivity {
     public EditText fecNac;
     public EditText colegio;
     public EditText carrera;
-    public Button btnRegistro2;
+    public EditText dni;
+    public Button btnRegistro;
 
 
     @Override
@@ -35,10 +32,11 @@ public class PostulanteRegistroActivity extends AppCompatActivity {
         fecNac = findViewById(R.id.Nac);
         colegio = findViewById(R.id.Cole);
         carrera = findViewById(R.id.Carr);
-        btnRegistro2 = findViewById(R.id.btnRegistro);
+        dni = findViewById(R.id.DniPos);
+        btnRegistro = findViewById(R.id.btnRegistro);
 
 
-        btnRegistro2.setOnClickListener(new View.OnClickListener() {
+        btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -48,29 +46,19 @@ public class PostulanteRegistroActivity extends AppCompatActivity {
                 String fechNaci= fecNac.getText().toString();
                 String colPro= colegio.getText().toString();
                 String carPos= carrera.getText().toString();
+                String dni = dni.getText().toString();
 
-                if(!apePaterno.equals("") && !apeMaterno.equals("") && !nombres.equals("") && !fechNaci.equals("") && !colPro.equals("") && !carPos.equals("") ) {
-                    Postulante nuevo = new Postulante(apePaterno, apeMaterno, nomAlum, fechNaci, colPro, carPos);
-                    intent.putExtra(objeto,  nuevo);
+                if(!apePaterno.equals("") && !apeMaterno.equals("") && !nombres.equals("") && !fechNaci.equals("") && !colPro.equals("") && !carPos.equals("") && !dni.equals("")) {
+                    Postulante postulante = new Postulante(apePaterno, apeMaterno, nomAlum, fechNaci, colPro, carPos, dni);
+                    intent.putExtra(objeto,  postulante);
                     setResult(RESULT_OK,intent);
-                    startActivity(intent);
+                    finish();
                     Toast.makeText(getApplicationContext(), "Postulante registrado exitosamente" , Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(getApplicationContext(), "Error\nLlene todos los campos para realizar su registro" , Toast.LENGTH_SHORT).show();
                 }
 
 
-            }
-        });
-
-        Button btnListar2 = findViewById(R.id.btnListar);
-
-        btnListar2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), PostulanteInfoActivity.class);
-                startActivity(intent);
-                startActivityForResult(new Intent(getApplicationContext(), PostulanteRegistroActivity.class), REQUEST_CODE_POSTULANTE);
             }
         });
 

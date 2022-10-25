@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_POSTULANTE = 1;
     public Postulante postulante;
     private TextView txtTabla;
+    private Button btnRegistro;
+    public Button btnLogin;
     public static final String objeto = "objeto";
     ArrayList<Postulante> listaPostulantes = new ArrayList<Postulante>();
     @Override
@@ -27,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        Button btnLogin = findViewById(R.id.btnLogin1);
+        btnLogin = findViewById(R.id.btnLogin1);
+        btnRegistro = findViewById(R.id.btnActivityMenu);
         txtTabla =findViewById(R.id.textTabla);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnRegistro = findViewById(R.id.btnActivityMenu);
+
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,10 +57,13 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_POSTULANTE) {
             if(resultCode == RESULT_OK){
                 postulante = (Postulante)data.getExtras().getSerializable(objeto);
-                txtTabla.setText(listaPostulantes.get(0).getApellidoMaterno());
+                listaPostulantes.add(postulante);
+                txtTabla.setText(listaPostulantes.get(listaPostulantes.size()-1).getId());
+            }else if(resultCode == RESULT_CANCELED){
+                if(postulante == null){
+                    txtTabla.setText("NO SE PUDO REGISTRAR AL POSTULANTE");
+                }
             }
-
-
         }
     }
 }

@@ -8,13 +8,13 @@ import android.view.View;
 import android.widget.Button;
 
 public class LoginActivity extends AppCompatActivity {
-
+    public Button btnIngresar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button btnIngresar = findViewById(R.id.btnActivityLogin);
+        btnIngresar = findViewById(R.id.btnActivityLogin);
         
         btnIngresar.setOnClickListener(new View.OnClickListener(){
             @Override
