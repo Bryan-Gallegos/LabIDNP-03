@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     public Button btnLogin;
     public static final String objeto = "objeto";
     public static final String lista = "lista";
-    ArrayList<Postulante> listaPostulantes = new ArrayList<Postulante>();
+    public static final ArrayList<Postulante> listaPostulantes = new ArrayList<Postulante>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK){
                 postulante = (Postulante)data.getExtras().getSerializable(objeto);
                 listaPostulantes.add(postulante);
-                txtTabla.setText(listaPostulantes.get(listaPostulantes.size()-1).getId());
             }else if(resultCode == RESULT_CANCELED){
                 if(postulante == null){
                     txtTabla.setText("NO SE PUDO REGISTRAR AL POSTULANTE");

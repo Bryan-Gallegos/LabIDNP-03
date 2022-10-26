@@ -2,17 +2,20 @@ package org.idnp.labidnp_03;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
+import static org.idnp.labidnp_03.MainActivity.listaPostulantes;
 
 public class PostulanteInfoActivity extends AppCompatActivity {
     public Button btnBuscar;
+    public Button btnCerrar;
     public EditText buscPos;
     public TextView dniInf;
     public TextView nombreInfo;
@@ -33,24 +36,29 @@ public class PostulanteInfoActivity extends AppCompatActivity {
         CarrInfo = findViewById(R.id.CarrInfo);
         buscPos = findViewById(R.id.buscPos);
         btnBuscar = findViewById(R.id.btnBuscar);
-        ArrayList<Postulante> listaPostulantes2 = (ArrayList<Postulante>) getIntent().getSerializableExtra("lista");
+        btnCerrar = findViewById(R.id.btnCerrar);
+        btnCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                Toast.makeText(getApplicationContext(), "Sesión cerrada exitosamente" , Toast.LENGTH_SHORT).show();
+            }
+        });
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String buscar = buscPos.getText().toString();
                 boolean encontrado = false;
-                int tamanio=listaPostulantes2.size();
                 if(!buscar.equals("")){
-                    for(int i=0;i<tamanio && encontrado==false;i++){
-                        if(buscar==listaPostulantes2.get(i).getId()){
+                    for(int i=0;i<(int)listaPostulantes.size() && encontrado==false;i++){
+                        if(buscar.equals(listaPostulantes.get(i).getId())){
                             encontrado=true;
-                            dniInf.setText(listaPostulantes2.get(i).getId());
-                            nombreInfo.setText(listaPostulantes2.get(i).getNombres());
-                            apellidosInfo.setText(listaPostulantes2.get(i).getApellidoPaterno()+" "+listaPostulantes2.get(i).getApellidoMaterno());
-                            fecNacInfo.setText(listaPostulantes2.get(i).getFechaNacimiento());
-                            coleInfo.setText(listaPostulantes2.get(i).getColegioProcedencia());
-                            CarrInfo.setText(listaPostulantes2.get(i).getCarreraPostula());
+                            dniInf.setText(listaPostulantes.get(i).getId());
+                            nombreInfo.setText(listaPostulantes.get(i).getNombres());
+                            apellidosInfo.setText(listaPostulantes.get(i).getApellidoPaterno()+" "+listaPostulantes.get(i).getApellidoMaterno());
+                            fecNacInfo.setText(listaPostulantes.get(i).getFechaNacimiento());
+                            coleInfo.setText(listaPostulantes.get(i).getColegioProcedencia());
+                            CarrInfo.setText(listaPostulantes.get(i).getCarreraPostula());
                             Toast.makeText(getApplicationContext(), "Postulante Encontrado" , Toast.LENGTH_SHORT).show();
                         }
                     }
